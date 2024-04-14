@@ -32,5 +32,34 @@ public static class Logger {
 			Main.NewText(message.WithPrefix(modName));
 		}
 	}
+
+	public static void ErrorLog(string message, string modName = null) {
+		if (modName == null) modName = Assembly.GetCallingAssembly().Name();
+		message = "Error: "  + message;
+		if (Main.netMode == 2) {
+			Console.WriteLine(message.WithPrefix(modName));
+		}
+		else {
+			Main.NewText(message.WithPrefix(modName));
+		}
+	}
+
+	public static void ErrorLog(Exception e, string modName = null) {
+		if (modName == null) modName = Assembly.GetCallingAssembly().Name();
+		string message = e.ToString();
+		if (Main.netMode == 2) {
+			Console.WriteLine(message.WithPrefix(modName));
+		}
+		else {
+			Main.NewText(message.WithPrefix(modName));
+		}
+	}
+
 }
 
+
+// Because using it internally wants to use log4net even with the DALib prefix.
+internal static class _Logger {
+	public static void Log(string message, string modName = null) => Logger.Log(message, modName);
+	public static void DebugLog(string message, string modName = null) => Logger.DebugLog(message, modName);
+}

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader.Config;
 
 using DALib.Extensions;
@@ -22,25 +23,32 @@ public class ClientConfig : ModConfig {
 	[DefaultValue(false)]
 	public bool Debug = false;
 
+	[Header("Debug Tooltips")]
+	[Label("Show Debug Tooltips")]
+	[Tooltip("Shows debug tooltips on items")]
+	[DefaultValue(false)]
+	public bool TooltipDebug = false;
+
 	[Header("Client Info")]
-//	[Label("Client UUID")]
-//	[Tooltip("Note: This UUID will not be the same between installations however you change it yourself in tModLoader's config.json under ClientUUID")]
-//	[JsonIgnore]
+	[Label("Client UUID")]
+	[Tooltip("Note: This UUID will not be the same between installations however you change it yourself in tModLoader's config.json under ClientUUID")]
+	[JsonIgnore]
 	internal string ClientUUID => Main.netMode == 2 ? "" : Main.clientUUID;
 
-//	[Label("Steam ID")]
-//	[Tooltip("Note: This will only be valid if you are using a Steam version of tModLoader")]
-//	[JsonIgnore]
+	[Label("Steam ID")]
+	[Tooltip("Note: This will only be valid if you are using a Steam version of tModLoader")]
+	[JsonIgnore]
 	internal string SteamID => Main.netMode == 2 ? "" : SteamUser.GetSteamID().m_SteamID.ToString() ?? "";
 
 	[Label("Authentication ID")]
 	[Tooltip("This is used for authentication with DALib\nThis is tied to either your Steam ID or Client UUID")]
-	public string AuthID => Main.netMode == 2 ? "" : !String.IsNullOrWhiteSpace(SteamID) ? MD5Hash(SteamID) : MD5Hash(ClientUUID);
+	[JsonIgnore]
+	public string AuthID => Main.netMode == 2 ? "" : !String.IsNullOrWhiteSpace(SteamID) ? HashString(SteamID) : HashString(ClientUUID);
 
 	[Label("Is Admin")]
 	[Tooltip("Are you a DALib Admin?\nIf so, you can edit any mod's Server Config that use DALib's Authentication")]
 	[JsonIgnore]
-	public string IsAdmin => Main.netMode == 2 ? "" : Main.netMode == 0 ? "Local" : ServerConfig.Instance.MasterAdminID == AuthID ? "Master" : ServerConfig.Instance.AdminIDs.ContainsCI(AuthID) ? "Yes" : "No";
+	public string IsAdmin => /*Main.netMode == 2 ? "" : Main.netMode == 0 ? "Local" : */ServerConfig.Instance.MasterAdminID == AuthID ? "Master" : ServerConfig.Instance.AdminIDs.ContainsCI(AuthID) ? "Yes" : "No";
 }
 
 [Label("Server Config")]
@@ -53,7 +61,7 @@ public class ServerConfig : ModConfig {
 	[Tooltip("Shows debug messages in the server console\nThis will affect all mods that use DALib's debug setting and methods")]
 	[DefaultValue(false)]
 	public bool Debug = false;
-
+/*
 	private string _MasterAdminID;
 	[Header("Authentication")]
 	[Label("Master Admin ID")]
@@ -69,6 +77,13 @@ public class ServerConfig : ModConfig {
 			_MasterAdminID = value;
 		}
 	}
+*/
+	[Header("Authentication")]
+	[Label("Master Admin ID")]
+	[Tooltip("The Authentication ID of the Master Admin")]
+	[BackgroundColor(255, 150, 150)]
+	[ReloadRequired]
+	public string MasterAdminID;
 
 	[Label("Admin IDs")]
 	[Tooltip("Add the Authentication IDs of players you want to be able to edit Server Configs for all mods that use DALib's authentication to this list\nPlayers can get their Authentication IDs from DALib's Client Info")]

@@ -47,7 +47,7 @@ public class MPlayer : ModPlayer {
 			Logger.DebugLog("Received ClientUUID " + ClientUUID + " from " + player.name);
 			PlayerInfo.ClientUUID = ClientUUID;
 			if (String.IsNullOrWhiteSpace(PlayerInfo.SteamID)) { // Only if there is no SteamID
-				PlayerInfo.AuthID = MD5Hash(ClientUUID);
+				PlayerInfo.AuthID = HashString(ClientUUID);
 			}
 		}
 	}
@@ -72,7 +72,7 @@ public class MPlayer : ModPlayer {
 			Logger.DebugLog("Received SteamID " + SteamID + " from " + player.name);
 			PlayerInfo.SteamID = SteamID;
 			if (!String.IsNullOrWhiteSpace(PlayerInfo.SteamID)) { // Just in case an invalid string was sent
-				PlayerInfo.AuthID = MD5Hash(SteamID);
+				PlayerInfo.AuthID = HashString(SteamID);
 			}
 		}
 	}

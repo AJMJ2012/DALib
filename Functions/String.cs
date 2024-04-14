@@ -14,4 +14,25 @@ public static class StringFunctions {
 		}
 		return sBuilder.ToString();
 	}
+
+	public const int hashSize = 12; // Terraria's ModConfig text field isn't wide enough for 12 :/
+	public static string HashString(string text, int size = hashSize)
+	{
+		const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		byte[] bytes = Encoding.UTF8.GetBytes(text);
+
+		SHA256Managed hashstring = new SHA256Managed();
+		byte[] hash = hashstring.ComputeHash(bytes);
+
+		char[] hash2 = new char[size];
+
+		// Note that here we are wasting bits of hash! 
+		// But it isn't really important, because hash.Length == 32
+		for (int i = 0; i < hash2.Length; i++)
+		{
+			hash2[i] = chars[hash[i] % chars.Length];
+		}
+
+		return new string(hash2);
+	}
 }
