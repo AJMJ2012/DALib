@@ -1,0 +1,89 @@
+Configs: {
+	ClientConfig: {
+		AuthID: {
+			Tooltip:
+				'''
+				This is used for authentication with DALib
+				This is tied to either your Steam ID or Client UUID
+				'''
+			Label: Authentication ID
+		}
+
+		IsAdmin: {
+			Label: Is Admin
+			Tooltip:
+				'''
+				Are you a DALib Admin?
+				If so, you can edit any mod's Server Config that use DALib's Authentication
+				'''
+		}
+
+		TooltipDebug: {
+			Tooltip: Shows debug tooltips on items
+			Label: Show Debug Tooltips
+		}
+
+		Debug: {
+			Tooltip:
+				'''
+				Shows debug messages
+				This will affect all mods that use DALib's debug setting and methods
+				'''
+			Label: Show Debug Messages
+		}
+
+		DisplayName: Client Config
+
+		Headers: {
+			DebugTooltips: Debug Tooltips
+			Debug: Debug
+		}
+	}
+
+	ServerConfig: {
+		DisplayName: Server Config
+
+		Debug: {
+			Label: Show Debug Messages
+			Tooltip:
+				'''
+				Shows debug messages in the server console
+				This will affect all mods that use DALib's debug setting and methods
+				'''
+		}
+
+		MasterAdminID: {
+			Label: Master Admin ID
+			Tooltip: The Authentication ID of the Master Admin
+		}
+
+		AdminIDs: {
+			Label: Admin IDs
+			Tooltip:
+				'''
+				Add the Authentication IDs of players you want to be able to edit Server Configs for all mods that use DALib's authentication to this list
+				Players can get their Authentication IDs from DALib's Client Info
+				'''
+		}
+
+		DALibAuth: {
+			Label: DALib
+			Tooltip: Master Admin will not be affected
+		}
+
+		HEROsModAuth: {
+			Label: HERO's Mod
+			Tooltip:
+				'''
+				Imported as regular Admin and Master Admin
+				NOT CURRENTLY IMPLEMENTED
+				'''
+		}
+
+		Headers: {
+			SupportedAuthenticationModes: Supported Authentication Modes
+			Authentication: Authentication
+			Debug: Debug
+		}
+	}
+}

@@ -19,8 +19,8 @@ public class MPlayer : ModPlayer {
 		AuthID = Config.Client.AuthID;
 	}
 
-	public override void OnEnterWorld(Player player) {
-		if (player.whoAmI != Main.myPlayer) { return; }
+	public override void OnEnterWorld() {
+		if (Player.whoAmI != Main.myPlayer) { return; }
 		if (Main.netMode == 1) {
 			if (!String.IsNullOrWhiteSpace(SteamID)) {
 				SendSteamID(SteamID);

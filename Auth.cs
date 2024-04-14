@@ -1,17 +1,18 @@
 using Terraria;
 
 using DALib.Extensions;
+using Terraria.Localization;
 
 namespace DALib;
 
 public static class Auth {
-	public static bool IsMasterAdmin(int whoAmI, ref string message) {
+	public static bool IsMasterAdmin(int whoAmI, ref NetworkText message) {
 		if (IsMasterAdmin(whoAmI)) {
-			message = "Server Config updated";
+			message  = NetworkText.FromLiteral("Server Config updated");
 			return true;
 		}
 		else {
-			message = "You are not a DALib Master Admin";
+			message  = NetworkText.FromLiteral("You are not a DALib Master Admin");
 			return false;
 		}
 	}
@@ -19,13 +20,13 @@ public static class Auth {
 	public static bool IsMasterAdmin(int whoAmI) 
 		=> Config.Server.MasterAdminID == Main.player[whoAmI].GetModPlayer<MPlayer>().AuthID;
 
-	public static bool IsAdmin(int whoAmI, ref string message) {
+	public static bool IsAdmin(int whoAmI, ref NetworkText message) {
 		if (IsAdmin(whoAmI)) {
-			message = "Server Config updated";
+			message  = NetworkText.FromLiteral("Server Config updated");
 			return true;
 		}
 		else {
-			message = "You are not a DALib Admin";
+			message  = NetworkText.FromLiteral("You are not a DALib Admin");
 			return false;
 		}
 	}
