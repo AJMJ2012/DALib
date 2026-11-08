@@ -6,13 +6,16 @@ using Terraria.ModLoader;
 
 namespace DALib.Functions;
 
-public static class NPCFunctions {
-#region NPCID
-	static Dictionary<int, string> npcTypeIDCache = new();
+public static class NPCFunctions
+{
+	#region NPCID
+	static Dictionary<int, string> npcTypeIDCache = [];
 
-	static string GetVanillaNPCName(int type) {
+	static string GetVanillaNPCName(int type)
+	{
 		string typeID = type.ToString();
-		if (!npcTypeIDCache.TryGetValue(type, out typeID)) {
+		if (!npcTypeIDCache.TryGetValue(type, out typeID))
+		{
 			typeID = FieldResolver.FindConstantName<short>(typeof(NPCID), (short)type) ?? typeID;
 			npcTypeIDCache.TryAdd(type, typeID);
 		}
@@ -22,7 +25,7 @@ public static class NPCFunctions {
 	static string GetNPCID(int type)
 		=> String.Format("{0}.{1}", GetNPCMod(type), GetNPCName(type));
 
-	static string GetNPCMod(int type) 
+	static string GetNPCMod(int type)
 		=> NPCLoader.GetNPC(type)?.Mod.Name ?? "Terraria";
 
 	static string GetNPCName(int type)
@@ -36,12 +39,14 @@ public static class NPCFunctions {
 
 	public static string GetNPCMod(this NPC npc)
 		=> GetNPCMod(npc.type);
-#endregion
-#region NPCAIStyleID
-	static Dictionary<int, string> npcAIStyleIDCache = new();
-	static string GetNPCAIStyleID(int aiStyle) {
+	#endregion
+	#region NPCAIStyleID
+	static Dictionary<int, string> npcAIStyleIDCache = [];
+	static string GetNPCAIStyleID(int aiStyle)
+	{
 		string aiStyleID = aiStyle.ToString();
-		if (!npcAIStyleIDCache.TryGetValue(aiStyle, out aiStyleID)) {
+		if (!npcAIStyleIDCache.TryGetValue(aiStyle, out aiStyleID))
+		{
 			aiStyleID = FieldResolver.FindConstantName<short>(typeof(NPCAIStyleID), (short)aiStyle) ?? aiStyleID;
 			npcAIStyleIDCache.TryAdd(aiStyle, aiStyleID);
 		}
@@ -50,5 +55,5 @@ public static class NPCFunctions {
 
 	public static string GetNPCAIStyleID(this NPC npc)
 		=> GetNPCAIStyleID(npc.aiStyle);
-#endregion
+	#endregion
 }

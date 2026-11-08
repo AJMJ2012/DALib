@@ -1,5 +1,42 @@
 Configs: {
 	ClientConfig: {
+		DisplayName: Client Config
+
+		Headers: {
+			Debug: Debug
+			DebugTooltips: Debug Tooltips
+			ClientInfo: Client Info
+		}
+
+		Debug: {
+			Tooltip:
+				'''
+				Shows debug messages
+				This will affect all mods that use DALib's debug setting and methods
+				'''
+			Label: Show Debug Messages
+		}
+
+		TooltipDebug: {
+			Tooltip: Shows debug tooltips on items
+			Label: Show Debug Tooltips
+		}
+
+		_: {
+			Tooltip: ""
+			Label: " "
+		}
+
+		ClientUUID: {
+			Tooltip: ""
+			Label: Client UUID
+		}
+
+		SteamID: {
+			Tooltip: ""
+			Label: Steam ID
+		}
+
 		AuthID: {
 			Tooltip:
 				'''
@@ -17,31 +54,16 @@ Configs: {
 				If so, you can edit any mod's Server Config that use DALib's Authentication
 				'''
 		}
-
-		TooltipDebug: {
-			Tooltip: Shows debug tooltips on items
-			Label: Show Debug Tooltips
-		}
-
-		Debug: {
-			Tooltip:
-				'''
-				Shows debug messages
-				This will affect all mods that use DALib's debug setting and methods
-				'''
-			Label: Show Debug Messages
-		}
-
-		DisplayName: Client Config
-
-		Headers: {
-			DebugTooltips: Debug Tooltips
-			Debug: Debug
-		}
 	}
 
 	ServerConfig: {
 		DisplayName: Server Config
+
+		Headers: {
+			SupportedAuthenticationModes: Supported Authentication Modes
+			Authentication: Authentication
+			Debug: Debug
+		}
 
 		Debug: {
 			Label: Show Debug Messages
@@ -78,12 +100,6 @@ Configs: {
 				Imported as regular Admin and Master Admin
 				NOT CURRENTLY IMPLEMENTED
 				'''
-		}
-
-		Headers: {
-			SupportedAuthenticationModes: Supported Authentication Modes
-			Authentication: Authentication
-			Debug: Debug
 		}
 	}
 }

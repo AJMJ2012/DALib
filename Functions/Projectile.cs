@@ -6,13 +6,16 @@ using Terraria.ModLoader;
 
 namespace DALib.Functions;
 
-public static class ProjectileFunctions {
-#region ProjectileID
-	static Dictionary<int, string> projectileTypeIDCache = new();
+public static class ProjectileFunctions
+{
+	#region ProjectileID
+	static Dictionary<int, string> projectileTypeIDCache = [];
 
-	static string GetVanillaProjectileName(int type) {
+	static string GetVanillaProjectileName(int type)
+	{
 		string typeID = type.ToString();
-		if (!projectileTypeIDCache.TryGetValue(type, out typeID)) {
+		if (!projectileTypeIDCache.TryGetValue(type, out typeID))
+		{
 			typeID = FieldResolver.FindConstantName<short>(typeof(ProjectileID), (short)type) ?? typeID;
 			projectileTypeIDCache.TryAdd(type, typeID);
 		}
@@ -22,7 +25,7 @@ public static class ProjectileFunctions {
 	static string GetProjectileID(int type)
 		=> String.Format("{0}.{1}", GetProjectileMod(type), GetProjectileName(type));
 
-	static string GetProjectileMod(int type) 
+	static string GetProjectileMod(int type)
 		=> ProjectileLoader.GetProjectile(type)?.Mod.Name ?? "Terraria";
 
 	static string GetProjectileName(int type)
@@ -36,12 +39,14 @@ public static class ProjectileFunctions {
 
 	public static string GetProjectileMod(this Projectile projectile)
 		=> GetProjectileMod(projectile.type);
-#endregion
-#region ProjectileAIStyleID
-	static Dictionary<int, string> projectileAIStyleIDCache = new();
-	static string GetProjectileAIStyleID(int aiStyle) {
+	#endregion
+	#region ProjectileAIStyleID
+	static Dictionary<int, string> projectileAIStyleIDCache = [];
+	static string GetProjectileAIStyleID(int aiStyle)
+	{
 		string aiStyleID = aiStyle.ToString();
-		if (!projectileAIStyleIDCache.TryGetValue(aiStyle, out aiStyleID)) {
+		if (!projectileAIStyleIDCache.TryGetValue(aiStyle, out aiStyleID))
+		{
 			aiStyleID = FieldResolver.FindConstantName<short>(typeof(ProjAIStyleID), (short)aiStyle) ?? aiStyleID;
 			projectileAIStyleIDCache.TryAdd(aiStyle, aiStyleID);
 		}
@@ -50,5 +55,5 @@ public static class ProjectileFunctions {
 
 	public static string GetProjectileAIStyleID(this Projectile projectile)
 		=> GetProjectileAIStyleID(projectile.aiStyle);
-#endregion
+	#endregion
 }

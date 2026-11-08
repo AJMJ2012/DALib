@@ -3,10 +3,13 @@ using Terraria.ID;
 
 namespace DALib.Checks;
 
-public static class NPCChecks {
-	public static bool IsBoss(this NPC npc) {
-		if (npc.boss || NPCID.Sets.ShouldBeCountedAsBoss[npc.type] || npc.GetBossHeadTextureIndex() >= 0) { return true; }
-		switch (npc.type) {
+public static class NPCChecks
+{
+	public static bool IsBoss(this NPC npc)
+	{
+        if (npc.boss || NPCID.Sets.ShouldBeCountedAsBoss[npc.type] || npc.GetBossHeadTextureIndex() >= 0) { return true; }
+        switch (npc.type)
+		{
 			case NPCID.EaterofWorldsHead:
 			case NPCID.GolemHead:
 			case NPCID.QueenBee:
@@ -15,9 +18,11 @@ public static class NPCChecks {
 		return false;
 	}
 
-	public static bool IsBossPiece(this NPC npc) {
+	public static bool IsBossPiece(this NPC npc)
+	{
 		if (IsChild(npc) && (Main.npc[npc.realLife].boss || NPCID.Sets.ShouldBeCountedAsBoss[Main.npc[npc.realLife].type] || Main.npc[npc.realLife].GetBossHeadTextureIndex() >= 0)) { return true; }
-		switch (npc.type) {
+		switch (npc.type)
+		{
 			case NPCID.Creeper:
 			case NPCID.EaterofWorldsBody:
 			case NPCID.EaterofWorldsTail:
@@ -52,13 +57,13 @@ public static class NPCChecks {
 	}
 
 	public static bool IsChild(this NPC npc)
-		=> (npc.realLife >= 0 && npc.realLife != npc.whoAmI);
+		=> npc.realLife >= 0 && npc.realLife != npc.whoAmI;
 
 	public static bool IsChildOfBoss(this NPC npc)
-		=> (npc.realLife >= 0 && npc.realLife != npc.whoAmI && IsBoss(Main.npc[npc.realLife]));
+		=> npc.realLife >= 0 && npc.realLife != npc.whoAmI && IsBoss(Main.npc[npc.realLife]);
 
 	public static bool IsChildOfBossPiece(this NPC npc)
-		=> (npc.realLife >= 0 && npc.realLife != npc.whoAmI && IsBossPiece(Main.npc[npc.realLife]));
+		=> npc.realLife >= 0 && npc.realLife != npc.whoAmI && IsBossPiece(Main.npc[npc.realLife]);
 
 	public static bool IsBossOrPieceOrChildOf(this NPC npc)
 		=> IsBoss(npc) || IsBossPiece(npc) || IsChildOfBoss(npc) || IsChildOfBossPiece(npc);

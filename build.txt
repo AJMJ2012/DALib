@@ -1,3 +1,4 @@
 author = Dark-Assassin
 displayName = Dark-Assassin's Mod Library (DALib)
-version = 1.4.4
+version = 1.4.4.9
+libraryMod = true

@@ -6,13 +6,16 @@ using Terraria.ModLoader;
 
 namespace DALib.Functions;
 
-public static class TileFunctions {
-#region TileID
-	static Dictionary<int, string> tileTypeIDCache = new();
+public static class TileFunctions
+{
+	#region TileID
+	static Dictionary<int, string> tileTypeIDCache = [];
 
-	static string GetVanillaTileName(int type) {
+	static string GetVanillaTileName(int type)
+	{
 		string typeID = type.ToString();
-		if (!tileTypeIDCache.TryGetValue(type, out typeID)) {
+		if (!tileTypeIDCache.TryGetValue(type, out typeID))
+		{
 			typeID = FieldResolver.FindConstantName<short>(typeof(TileID), (short)type) ?? typeID;
 			tileTypeIDCache.TryAdd(type, typeID);
 		}
@@ -22,7 +25,7 @@ public static class TileFunctions {
 	static string GetTileID(int type)
 		=> String.Format("{0}.{1}", GetTileMod(type), GetTileName(type));
 
-	static string GetTileMod(int type) 
+	static string GetTileMod(int type)
 		=> TileLoader.GetTile(type).Mod.Name ?? "Terraria";
 
 	static string GetTileName(int type)
@@ -36,5 +39,5 @@ public static class TileFunctions {
 
 	public static string GetTileMod(this Tile tile)
 		=> GetTileMod(tile.TileType);
-#endregion
+	#endregion
 }
